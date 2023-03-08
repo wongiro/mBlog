@@ -1,0 +1,95 @@
+/* ----- HEADER COMPONENT MEDIA QUERRIES -----*/
+
+/* Extra small devices (phones) */
+@media only screen and (max-width: 599px) {
+    .navbar {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .navbar-button {
+      width: 100%;
+    }
+  
+    .list {
+      display: none;
+      width: 100%;
+    }
+  
+    .list li {
+      margin: 10px 0;
+      text-align: center;
+    }
+  
+    .list li a {
+      display: block;
+      padding: 10px;
+      border-bottom: 1px solid #fff;
+    }
+  
+    .login {
+      width: 100%;
+    }
+  }
+  
+  /* Small devices (landscape phones) */
+  @media only screen and (min-width: 600px) and (max-width: 959px) {
+    .navbar-button {
+      width: 100%;
+    }
+  
+    .list {
+      display: none;
+      width: 100%;
+    }
+  
+    .list li {
+      margin: 10px 0;
+      text-align: center;
+    }
+  
+    .list li a {
+      display: block;
+      padding: 10px;
+      border-bottom: 1px solid #fff;
+    }
+  
+    .login {
+      width: 100%;
+    }
+  }
+  
+  /* Medium devices (tablets) */
+  @media only screen and (min-width: 960px) and (max-width: 1279px) {
+    .navbar {
+      justify-content: space-between;
+    }
+  
+    .navbar-button {
+      width: auto;
+    }
+  
+    .list {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: auto;
+    }
+  
+    .list li {
+      margin: 0 10px;
+      text-align: center;
+    }
+  
+    .list li a {
+      display: inline-block;
+      padding: 10px;
+      border-bottom: none;
+    }
+  
+    .login {
+      width: auto;
+    }
+  }
+  
+    /* ----- END OF HEADER QUERRIES ----- */
