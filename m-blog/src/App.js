@@ -9,6 +9,7 @@ import Header from './components/Header/Header';
 
 import './style.css';
 import './mediaQuerry.css';
+import Auth from './pages/Auth';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/add-blog" element={<AddBlog />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/auth" element={<Auth setActive={setActive}/>} />
      </Routes>
     </div>
   );
