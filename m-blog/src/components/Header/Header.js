@@ -8,21 +8,21 @@ const Header = ({active, setActive}) => {
       <div className='navbar-buttons'> 
         <div className='navbar-list'>
           <ul className='navbar-list-items'>
-            <Link to="/" onClick={()=> setActive("home")}>
-                <li>Home</li>
+            <Link to="/">
+                <li className={'${active === "home" ? "active" : ""}'} onClick={()=> setActive("home")}>Home</li>
             </Link>
-            <Link to="/add-blog" onClick={()=> setActive("create")}>
-                <li >Create Blog</li>
+            <Link to="/add-blog">
+                <li className={'${active === "create" ? "active" : ""}'} onClick={()=> setActive("create")}>Create Blog</li>
             </Link>
-            <Link to="/about" onClick={()=> setActive("about")}>
-                <li>About</li>
+            <Link to="/about">
+                <li className={'${active === "about" ? "active" : ""}'} onClick={()=> setActive("about")}>About</li>
             </Link>
           </ul>
         </div>
         <div className='navbar-login'>
           <ul className='navbar-login-items'>
-            <Link to="/login" onClick={()=> setActive("login")}>
-                <li>Login</li>
+            <Link to="/auth">
+                <li className={'${active === "sign in" ? "active" : ""}'} onClick={()=> setActive("sign in")}>Sign In</li>
             </Link>
           </ul>
         </div>
