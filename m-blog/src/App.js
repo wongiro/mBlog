@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import AddBlog from './pages/AddBlog';
@@ -44,7 +44,8 @@ function App() {
      <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/add-blog" element={<AddBlog />} />
+        <Route path="/update/:id" element={user?.uid ? <AddBlog user={user} /> : <Navigate to="/" />} />
+        <Route path="/add-blog" element={user?.uid ? <AddBlog user={user} /> : <Navigate to="/" />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/auth" element={<Auth setActive={setActive}/>} />
      </Routes>
