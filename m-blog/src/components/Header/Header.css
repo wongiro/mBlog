@@ -1,100 +1,126 @@
 .navbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 60px;
-    padding: 0 20px;
-  }
-  
-  .navbar-buttons {
-    display: flex;
-    align-items: center;
-  }
-  
-  .navbar-list {
-    margin-right: 10px;
-  }
-  
-  .navbar-list-items {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-  }
-  
-  .navbar-list-items li {
-    margin-right: 10px;
-  }
-  
-  .navbar-login-items {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .navbar-login-items link li {
-    margin-right: 10px;
-  }
-  
-  .navbar-login-items a {
-    color: #333333;
-    text-decoration: none;
-  }
-  
-  .navbar-list-items a {
-    color: #333333;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .navbar-list-items a:hover {
-    color: #666666;
-  }
-  
-  .navbar-login-items a:hover {
-    color: #666666;
-  } 
-  
+  display: flex;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  padding: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+}
 
-  /* Media Queries */
-  @media only screen and (max-width: 992px) {
-    .navbar {
-      height: auto;
-      padding: 10px 20px;
-    }
-    
-    .navbar-buttons {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    
-    .navbar-list {
-      margin-right: 0;
-      margin-bottom: 10px;
-    }
-    
-    .navbar-login-items {
-      margin-left: auto;
-    }
+.navbarButtons {
+  display: flex;
+  align-items: center;
+}
+
+.navbarList {
+  display: flex;
+}
+
+.navbarListItems {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navbarListItems li {
+  margin-right: 20px;
+  cursor: pointer;
+  color: #555;
+}
+
+.navbarListItems li:hover {
+  color: #000;
+}
+
+.navbarListItems .active {
+  color: #000;
+  font-weight: bold;
+}
+
+.navbarLogin {
+  display: flex;
+  align-items: center;
+}
+
+.navbarLoginItems {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navbarLoginItems li {
+  cursor: pointer;
+  margin-right: 20px;
+  color: #555;
+}
+
+.navbarLoginItems li:hover {
+  color: rgb(217, 39, 39);
+}
+
+.logout {
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+  color: #f44336;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+}
+div p{
+  display: flex;
+  align-items: center;
+}
+
+
+
+/*------- Media Queries ---------*/
+/* Mobile devices */
+@media (max-width: 767px) {
+  .navbar {
+    flex-direction: column;
+    padding: 10px 20px;
   }
   
-  @media only screen and (max-width: 576px) {
-    .navbar-buttons {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .navbar-list {
-      margin-bottom: 0;
-    }
-    
-    .navbar-list-items li,
-    .navbar-login-items li {
-      margin-right: 0;
-      margin-bottom: 10px;
-    }
+  .navbarButtons {
+    width: 100%;
   }
   
+  .navbarList {
+    margin-bottom: 10px;
+  }
+  
+  .navbarListItems li {
+    margin-right: 0;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
+  }
+  
+  .navbarLoginItems {
+    display: none;
+  }
+}
+
+/* Tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+  .navbarListItems li {
+    margin-right: 30px;
+  }
+  
+  .navbarLoginItems li {
+    margin-right: 30px;
+  }
+}
+
+
+
+
+
