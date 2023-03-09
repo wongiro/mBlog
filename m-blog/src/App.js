@@ -1,11 +1,13 @@
 import './App.css';
-import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import AddBlog from './pages/AddBlog';
 import NotFound from './pages/NotFound';
 import Header from './components/Header/Header';
+import { auth } from './firebase';
+import { signOut } from 'firebase/auth';
 
 import './style.css';
 import './mediaQuerry.css';
@@ -14,10 +16,31 @@ import Auth from './pages/Auth';
 function App() {
 
   const [active, setActive] = useState("home");
+  const [user, setUser] = useState(null);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
+
+  const handleLogOut = () => {
+    signOut(auth).then(() => {
+      setUser(null);
+      setActive('login');
+    })
+    navigate('auth');
+  };
 
   return (
     <div className="App">
-    <Header  setActive={setActive} active={active}/>
+    <Header  setActive={setActive} active={active} user={user} handleLogOut={handleLogOut}/>
      <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
