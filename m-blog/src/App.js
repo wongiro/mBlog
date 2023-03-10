@@ -2,17 +2,17 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
-import About from './pages/About';
-import AddBlog from './pages/AddBlog';
+import About from './pages/About/About';
+import AddBlog from './pages/Add Blog/AddBlog';
 import NotFound from './pages/NotFound';
 import Header from './components/Header/Header';
 import { auth } from './firebase';
 import { signOut } from 'firebase/auth';
-import Details from './pages/Details';
+import Details from './pages/Details/Details';
 
 import './style.css';
 import './mediaQuerry.css';
-import Auth from './pages/Auth';
+import Auth from './pages/Auth/Auth';
 
 function App() {
 
@@ -36,7 +36,7 @@ function App() {
       setUser(null);
       setActive('login');
     })
-    navigate('auth');
+    navigate('auth'); 
   };
 
   return (

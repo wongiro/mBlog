@@ -48,11 +48,12 @@
   margin: 0;
   padding: 0;
   display: flex;
+  float: right;
 }
 
 .navbarLoginItems li {
   cursor: pointer;
-  margin-right: 20px;
+  margin-right: 3rem;
   color: #555;
 }
 
@@ -78,7 +79,6 @@ div p{
   display: flex;
   align-items: center;
 }
-
 
 
 /*------- Media Queries ---------*/
@@ -119,8 +119,3 @@ div p{
     margin-right: 30px;
   }
 }
-
-
-
-
-
