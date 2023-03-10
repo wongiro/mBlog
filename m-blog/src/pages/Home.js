@@ -2,8 +2,9 @@ import React,{ useEffect, useState } from 'react'
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import BlogSection from '../components/Blog Section/BlogSection';
+import Spinner from '../components/Spinner/Spinner';
 
-const Home = () => {
+const Home = ({setActive, user}) => {
 
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
@@ -16,6 +17,8 @@ const Home = () => {
           list.push({...doc.data(), id: doc.id});
         });
         setBlogs(list);
+        setLoading(false);
+        setActive('home');
       }, (error) => {
         console.log(error);
       }
@@ -24,12 +27,16 @@ const Home = () => {
     return () => unsub();
   }, []);
 
+  if (loading) {
+    return <Spinner />
+  }
+
   console.log("blogs", blogs);
 
   return (
     <div className='container'>
       <div className='home'>
-        <BlogSection blogs={blogs} />
+        <BlogSection blogs={blogs} user={user}/>
       </div>
     </div>
   )

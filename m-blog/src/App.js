@@ -8,6 +8,7 @@ import NotFound from './pages/NotFound';
 import Header from './components/Header/Header';
 import { auth } from './firebase';
 import { signOut } from 'firebase/auth';
+import Details from './pages/Details';
 
 import './style.css';
 import './mediaQuerry.css';
@@ -42,7 +43,8 @@ function App() {
     <div className="App">
     <Header  setActive={setActive} active={active} user={user} handleLogOut={handleLogOut}/>
      <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} setActive={setActive} user={user}/>
+        <Route path="/details/:id" element={<Details setActive={setActive} />} />
         <Route path="/about" element={<About />} />
         <Route path="/update/:id" element={user?.uid ? <AddBlog user={user} /> : <Navigate to="/" />} />
         <Route path="/add-blog" element={user?.uid ? <AddBlog user={user} /> : <Navigate to="/" />} />

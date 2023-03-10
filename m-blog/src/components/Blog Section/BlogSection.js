@@ -29,7 +29,7 @@ const BlogSection = ({ blogs, user }) => {
                 {excerpt(item.description, 100)}
               </div>
               <div className='blog-post-content-read-more'>
-                <button className='read-more'>Read More</button>
+                <Link to={`/details/${item.id}` }> <button className='read-more'>Read More</button></Link>
                 <div>
                   <IoIosTrash name='trash' style={{ margin: "2px", cursor: "pointer", size: "2px" }} />
                   <AiFillEdit name='edit' style={{ margin: "2px", cursor: "pointer", size: "2px" }}/>
