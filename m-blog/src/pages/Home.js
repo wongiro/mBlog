@@ -3,6 +3,7 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import BlogSection from '../components/Blog Section/BlogSection';
 import Spinner from '../components/Spinner/Spinner';
+import { deleteDoc, doc } from 'firebase/firestore';
 
 const Home = ({setActive, user}) => {
 
@@ -31,12 +32,25 @@ const Home = ({setActive, user}) => {
     return <Spinner />
   }
 
+  const handleDelete = async (id) => {
+    if(window.confirm('Are you sure, you want to delete this blog?')){
+      try{
+        setLoading(true);
+        await deleteDoc(doc(db, 'blogs', id));
+        alert('Blog deleted successfully');
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   console.log("blogs", blogs);
 
   return (
     <div className='container'>
       <div className='home'>
-        <BlogSection blogs={blogs} user={user}/>
+        <BlogSection blogs={blogs} user={user} handleDelete={handleDelete} />
       </div>
     </div>
   )
