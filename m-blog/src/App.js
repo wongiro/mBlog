@@ -46,7 +46,7 @@ function App() {
         <Route path="/" element={<Home />} setActive={setActive} user={user}/>
         <Route path="/details/:id" element={<Details setActive={setActive} />} />
         <Route path="/about" element={<About />} />
-        <Route path="/update/:id" element={user?.uid ? <AddBlog user={user} /> : <Navigate to="/" />} />
+        <Route path="/update/:id" element={user?.uid ? <AddBlog user={user} setActive={setActive} /> : <Navigate to="/" />} />
         <Route path="/add-blog" element={user?.uid ? <AddBlog user={user} /> : <Navigate to="/" />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/auth" element={<Auth setActive={setActive}/>} />

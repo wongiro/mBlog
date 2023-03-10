@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { storage, db } from '../firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
+import { addDoc, collection, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { useNavigate, useParams } from 'react-router-dom';
+import { doc, getDoc } from 'firebase/firestore';
+
 
 import './AddBlog.css';
 
@@ -11,11 +13,13 @@ const initialState = {
   description: '',
 };
 
-const AddBlog = ({user}) => {
+const AddBlog = ({user, setActive}) => {
 
   const [form, setForm] = useState(initialState);
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(null);
+
+  const { id } = useParams();
 
   const { title, description } = form;
 
@@ -44,7 +48,8 @@ const AddBlog = ({user}) => {
         console.log(error);
       }, () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setForm((prev) => ({...prev, url: downloadURL}));
+          alert('Image uploaded successfully');
+          setForm((prev) => ({...prev, imgUrl: downloadURL}));
         });
       });
 
@@ -53,6 +58,19 @@ const AddBlog = ({user}) => {
     file && uploadFile();
   }, [file]);
 
+  useEffect (() => {
+    id && getBlogDetail();
+  }, [id]);
+
+  const getBlogDetail = async () => {
+    const docRef = doc(db, 'blogs', id);
+    const snapshot = await getDoc(docRef);
+    if (snapshot.exists()) {
+      setForm(snapshot.data());
+    }
+    setActive(null)
+  }
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -60,29 +78,42 @@ const AddBlog = ({user}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(title && description && file){
-      try {
-        await addDoc(collection(db, 'blogs'), {
-          ...form,
-          timestamp: serverTimestamp(),
-          author: user.displayName,
-          userId: user.uid,
-        });
-         
+    if(title && description && file ){
+      if (!id) {
+        try {
+          await addDoc(collection(db, 'blogs'), {
+            ...form,
+            timestamp: serverTimestamp(),
+            author: user.displayName,
+            userId: user.uid,
+          });
+           
+        }
+        catch (error) {
+          console.log(error);
+        }
+      } else {
+        try {
+          await updateDoc(doc(db, 'blogs', id), {
+            ...form,
+            timestamp: serverTimestamp(),
+            author: user.displayName,
+            userId: user.uid,
+          });
+          alert('Blog updated successfully');
+        } catch (error) {
+          console.log(error);
+        }
       }
-      catch (error) {
-        console.log(error);
-      }
-    }
-
     navigate('/');
+    }
   };
 
   return (
     <div className="container">
       <div className="add-blog">
         <div className="add-blog-form">
-          <h2>Create Blog</h2>
+          <h2>{id ?  "Update Blog" : "Create Blog"}</h2>
         </div>
         <div className="add-blog-form">
           <form className="form" onSubmit={handleSubmit}>
@@ -109,7 +140,7 @@ const AddBlog = ({user}) => {
               <input type="file" id="file" onChange={(e) => setFile(e.target.files[0])} />
             </div>
             <div className="form-input">
-              <button type="submit" disabled={progress !== null && progress < 100}>Post Blog</button>
+              <button type="submit" disabled={progress !== null && progress < 100}>{id ? "Update blog" : "Post blog"}</button>
             </div>
           </form>
         </div>
